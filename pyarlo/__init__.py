@@ -9,7 +9,7 @@ from pyarlo.media import ArloMediaLibrary
 from pyarlo.const import (
     BILLING_ENDPOINT, DEVICES_ENDPOINT,
     FRIENDS_ENDPOINT, LOGIN_ENDPOINT, PROFILE_ENDPOINT,
-    PRELOAD_DAYS, RESET_ENDPOINT)
+    PRELOAD_DAYS, RESET_ENDPOINT, USER_AGENT)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -79,8 +79,11 @@ class PyArlo(object):
 
     def cleanup_headers(self):
         """Reset the headers and params."""
-        headers = {'Content-Type': 'application/json'}
-        headers['Authorization'] = self.__token
+        headers = {
+            'Authorization': self.__token,
+            'Content-Type': 'application/json',
+            'User-Agent': USER_AGENT
+        }
         self.__headers = headers
 
         params = {'email': self.__username, 'password': self.__password}

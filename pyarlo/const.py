@@ -1,5 +1,12 @@
 """Constants used by Python Arlo."""
 
+
+# USER AGENT
+# Note: Special user agent required for live_streaming endpoint.
+USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 11_1_2 like Mac OS X) " \
+             "AppleWebKit/604.3.5 (KHTML, like Gecko) " \
+             "Mobile/15B202 NETGEAR/v1 (iOS Vuezone)"
+
 # API Endpoints
 API_URL = "https://arlo.netgear.com/hmsweb"
 

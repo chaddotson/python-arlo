@@ -3,7 +3,7 @@
 import logging
 from pyarlo.const import (
     RESET_CAM_ENDPOINT, STREAM_ENDPOINT, STREAMING_BODY,
-    SNAPSHOTS_ENDPOINT, SNAPSHOTS_BODY)
+    SNAPSHOTS_ENDPOINT, SNAPSHOTS_BODY, USER_AGENT)
 from pyarlo.media import ArloMediaLibrary
 from pyarlo.utils import http_get
 
@@ -276,7 +276,10 @@ class ArloCamera(object):
 
         _LOGGER.debug("Streaming results %s", ret)
         if ret.get('success'):
-            return ret.get('data').get('url')
+            stream_url = ret.get('data').get('url')
+            return "rtsps://" + stream_url[7:] \
+                   if stream_url[0:7] == "rtsp://" else stream_url
+
         return ret.get('data')
 
     @property
